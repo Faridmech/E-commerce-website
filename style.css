@@ -61,7 +61,7 @@ header{
 .cart{
     position: fixed;
     top: 0;
-    right: -100%;
+    right: 0;
     width: 360px;
     min-height: 100vh;
     background: var(--bg-color);
@@ -141,7 +141,7 @@ header{
 .btn-buy:hover{
     background: var(--text-color);
 }
-#cart-close{
+#close-cart{
    position: absolute;
    top: 1rem;
    right: 0.8rem;
@@ -169,6 +169,11 @@ header{
     grid-template-columns: repeat(auto-fit, minmax(220px,auto));
     gap: 1.5rem;
 }
+/* .shop-content.ac{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+        gap: 1.5rem;
+} */
 
 .product-box{
     background: rgb(103, 158, 158);
