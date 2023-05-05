@@ -44,6 +44,20 @@ function ready(){
         button.addEventListener("click", addCartClicked);
     }
 
+
+    // Buy Button
+    document.getElementsByClassName("btn-buy")[0].addEventListener("click", buyButtonClicked);
+}
+
+// Buy Button
+
+function buyButtonClicked(){
+    alert("Your Order Is placed ")
+    var cartContent = document.getElementsByClassName("cart-content")[0];
+    while (cartContent.hasChildNodes()){
+        cartContent.removeChild(cartContent.firstChild)
+    }
+    updateTotal();
 }
 
 // Add Cart
@@ -57,6 +71,7 @@ function addCartClicked(e){
     updateTotal();
 }
 
+// Remove Cart Items
 function removeCartItem(e){
     var buttonClicked = e.target;
     buttonClicked.parentElement.remove();
@@ -79,25 +94,28 @@ function addProductToCart(title, price, productImg){
     var cartItemsNames = cartItems.getElementsByClassName("cart-product-title");
 
     for (var i = 0; i < cartItemsNames.length; i++){
-        alert("You have already add this Item")
-        return
+        if(cartItemsNames[i].innerText == title){
+          alert("You have already add this Item")
+        return  
+        }
+        
     }
-    
-}
-
-var cartBoxContent = `
-                       <img src="Image/bag.jpg" alt="" class="cart-img">
+    var cartBoxContent = `
+                       <img src="${productImg}" alt="" class="cart-img">
                         <div class="detail-box">
-                            <div class="cart-product-title">Back pack</div>
-                            <div class="cart-price">$50.21</div>
+                            <div class="cart-product-title">${title}</div>
+                            <div class="cart-price">${price}</div>
                             <input type="number" value="1" class="cart-quantity">
                         </div>
                         <i class='bx bx-trash cart-remove'></i>`
 
-cartShopBox.innerHTMl = cartBoxContent;
+cartShopBox.innerHTML = cartBoxContent;
 cartItems.append(cartShopBox);
 cartShopBox.getElementsByClassName("cart-remove")[0].addEventListener("click", removeCartItem);
 cartShopBox.getElementsByClassName("cart-quantity")[0].addEventListener("change", quantityChanged);
+}
+
+
 
 
 function updateTotal() {
@@ -112,9 +130,10 @@ function updateTotal() {
         var price = parseFloat(priceElement.innerText.replace("$", ""));
         var quantity = quantityElement.value;
         total = total + (price * quantity);
+        }
         total = Math.round(total * 100) / 100
         document.getElementsByClassName("total-price")[0].innerText = "$" +total
 
-    }
+    
 }
 
